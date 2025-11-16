@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页</title>
+    <link rel="stylesheet"  href="/static/bootstrap/css/bootstrap.css">
+     <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        .jumbotron-custom {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+        .feature-box {
+            text-align: center;
+            padding: 30px 15px;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">我的博客</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login">登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron jumbotron-custom">
+        <div class="container text-center">
+            <h1>欢迎来到我的个人博客</h1>
+            <p class="lead">这里是我分享技术见解、生活感悟和学习心得的地方</p>
+            <p><a class="btn btn-primary btn-lg" href="/login" role="button">点击进入登录页面</a></p>
+        </div>
+    </div>
+    <div class="container" style="padding: 60px 0;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <span class="glyphicon glyphicon-pencil" style="font-size: 40px; color: #3498db;"></span>
+                    <h3>技术分享</h3>
+                    <p>分享编程技巧、开发经验和前沿技术探索。</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <span class="glyphicon glyphicon-book" style="font-size: 40px; color: #3498db;"></span>
+                    <h3>学习笔记</h3>
+                    <p>记录学习过程中的心得与体会，整理知识体系。</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <span class="glyphicon glyphicon-heart" style="font-size: 40px; color: #3498db;"></span>
+                    <h3>生活随笔</h3>
+                    <p>偶尔也会写写生活中的小确幸与思考。</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center" style="margin-top: 40px;">
+                <a href="/login" class="btn btn-default btn-lg">登录以查看更多内容</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2023 个人博客 · 保留所有权利</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/static/jquery.js"></script>
+<script src="/static/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客主页</title>
+    <link rel="stylesheet"  href="/static/bootstrap/css/bootstrap.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .blog-header {
+            background-color: #fff;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e7e7e7;
+        }
+        .blog-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .blog-description {
+            font-size: 18px;
+            color: #777;
+        }
+        .article-card {
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .article-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+        }
+        .article-title {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .article-title a {
+            color: #333;
+            text-decoration: none;
+        }
+        .article-title a:hover {
+            color: #337ab7;
+        }
+        .article-meta {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .article-type {
+            display: inline-block;
+            background: #337ab7;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .article-excerpt {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .read-more {
+            color: #337ab7;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        .sidebar-widget {
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        .sidebar-title {
+            font-size: 18px;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        .category-list, .popular-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .category-list li, .popular-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .category-list li:last-child, .popular-list li:last-child {
+            border-bottom: none;
+        }
+        .category-list a, .popular-list a {
+            color: #555;
+            text-decoration: none;
+        }
+        .category-list a:hover, .popular-list a:hover {
+            color: #337ab7;
+        }
+        .category-count {
+            float: right;
+            background: #f5f5f5;
+            color: #777;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+        }
+        .tag-cloud a {
+            display: inline-block;
+            background: #f5f5f5;
+            color: #555;
+            padding: 5px 10px;
+            margin: 0 5px 8px 0;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .tag-cloud a:hover {
+            background: #337ab7;
+            color: #fff;
+        }
+        .pagination {
+            text-align: center;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+     <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">我的博客</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">首页</a></li>
+                    <li><a href="#">分类</a></li>
+                    <li><a href="#">归档</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/add">写文章</a></li>
+                    <li><a href="#">{{username}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 博客头部 -->
+    <div class="blog-header">
+        <div class="container">
+            <h1 class="blog-title">我的技术博客</h1>
+            <p class="blog-description">分享技术心得，记录学习历程</p>
+        </div>
+    </div>
+
+    <!-- 主要内容区 -->
+    <div class="container">
+        <div class="row">
+            <!-- 文章列表 -->
+            <div class="col-md-8">
+                {%for article in articles%}
+                <div class="article-card">
+                    <h2 class="article-title">
+                       <a href="{{ url_for('detail', article_id=article.id) }}">{{ article.title }}</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span class="article-type">{{article.type}}</span>
+                        <span>作者：{{article.author.username}}</span> ·
+                        <span>{{ article.time.strftime('%Y-%m-%d')}}</span> ·
+                    </div>
+                    <p class="article-excerpt">
+                    {{ article.content[:150] }} {% if article.content|length > 150 %}...
+                    <br><a href="{{ url_for('detail', article_id=article.id) }}" class="read-more">阅读全文 →</a>{% endif %}
+                    </p>
+                </div>
+                {% endfor %}
+                <!-- 分页 -->
+                <div class="pagination">
+        <ul class="pagination">
+            <!-- 上一页按钮 -->
+            {% if current_page > 1 %}
+            <li><a href="?page={{ current_page - 1 }}">上一页</a></li>
+            {% else %}
+            <li class="disabled"><a href="#">上一页</a></li>
+            {% endif %}
+
+            <!-- 当前页信息 -->
+            <li class="active"><a href="#">第 {{ current_page }} 页</a></li>
+
+            <!-- 下一页按钮 -->
+            {% if current_page < total_pages %}
+            <li><a href="?page={{ current_page + 1 }}">下一页</a></li>
+            {% else %}
+            <li class="disabled"><a href="#">下一页</a></li>
+            {% endif %}
+        </ul>
+    </div>
+            </div>
+            <!-- 侧边栏 -->
+            <div class="col-md-4">
+                <!-- 关于我 -->
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-title">关于我</h3>
+                    <p>一名热爱技术的全栈开发者，专注于Python和Web开发，喜欢分享学习经验和项目实践。</p>
+                </div>
+
+                <!-- 分类 -->
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-title">文章分类</h3>
+                    <ul class="category-list">
+                        <li><a href="#">Python <span class="category-count">12</span></a></li>
+                        <li><a href="#">Flask <span class="category-count">8</span></a></li>
+                        <li><a href="#">前端开发 <span class="category-count">6</span></a></li>
+                        <li><a href="#">数据库 <span class="category-count">5</span></a></li>
+                        <li><a href="#">Linux <span class="category-count">3</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- 热门文章 -->
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-title">热门文章</h3>
+                    <ul class="popular-list">
+                        <li><a href="#">Flask Web开发从入门到实践</a></li>
+                        <li><a href="#">SQLAlchemy数据库操作最佳实践</a></li>
+                        <li><a href="#">Bootstrap 5响应式布局实战指南</a></li>
+                        <li><a href="#">Docker容器化部署实战</a></li>
+                        <li><a href="#">RESTful API设计原则</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2023 个人博客 · 保留所有权利</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/static/jquery.js"></script>
+<script src="/static/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>
